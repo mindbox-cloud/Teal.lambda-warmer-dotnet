@@ -9,8 +9,10 @@ using Amazon.Lambda.Serialization.SystemTextJson.Converters;
 
 namespace LambdaWarmer;
 
-public abstract class WarmerFunction<TRequest, TResponse> 
+public abstract class WarmerFunction<TRequest, TResponse>
 {
+    private readonly IAmazonLambda _lambda;
+
     private readonly WarmerConfig _config;
     private bool _warm;
     private DateTimeOffset? _lastAccess;
@@ -19,6 +21,7 @@ public abstract class WarmerFunction<TRequest, TResponse>
     {
         _config = config ?? new WarmerConfig();
         SerializerOptions = CreateDefaultJsonSerializationOptions();
+        _lambda = new AmazonLambdaClient();
     }
 
     // ReSharper disable once UnusedMember.Global
@@ -64,10 +67,8 @@ public abstract class WarmerFunction<TRequest, TResponse>
         }
     }
 
-    private static async Task InvokeConcurrency(ILambdaContext context, int concurrency, string correlationId)
+    private async Task InvokeConcurrency(ILambdaContext context, int concurrency, string correlationId)
     {
-        var lambda = new AmazonLambdaClient();
-
         var invocations = new List<Task>();
 
         for (var i = 2; i <= concurrency; i++)
@@ -88,7 +89,7 @@ public abstract class WarmerFunction<TRequest, TResponse>
                 })
             };
                 
-            invocations.Add(lambda.InvokeAsync(invokeRequest));
+            invocations.Add(_lambda.InvokeAsync(invokeRequest));
         }
 
         await Task.WhenAll(invocations);
