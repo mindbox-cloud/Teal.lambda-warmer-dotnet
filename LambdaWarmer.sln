@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaWarmer", "LambdaWarmer\LambdaWarmer.csproj", "{F974B18C-609C-4099-9B62-5360268C3643}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaWarmer.TestFunction", "LambdaWarmer.TestFunction\src\LambdaWarmer.TestFunction\LambdaWarmer.TestFunction.csproj", "{482E6122-B174-4EF8-BF07-1EF82E1212E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaWarmer.TestFunction", "LambdaWarmer.TestFunction\LambdaWarmer.TestFunction.csproj", "{482E6122-B174-4EF8-BF07-1EF82E1212E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
