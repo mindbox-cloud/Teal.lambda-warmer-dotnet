@@ -55,7 +55,6 @@ public abstract class WarmerFunction<TRequest, TResponse>
         }
 
         _warm = true;
-        _lastAccess = DateTimeOffset.UtcNow;
     
         if (concurrency > 1)
         {
