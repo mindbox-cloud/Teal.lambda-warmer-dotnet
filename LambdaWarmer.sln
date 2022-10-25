@@ -7,6 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{AD2C9662-F825-4FE9-AA9F-8E271CB6A8CF}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\publish.yml = .github\workflows\publish.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

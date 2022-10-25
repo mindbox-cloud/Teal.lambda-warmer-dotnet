@@ -6,6 +6,10 @@
 
 Установите Lambda Warmer из Nuget как зависимость проекта
 
+```shell
+dotnet add package LambdaWarmer --version 1.0.0
+```
+
 ### Использование
 
 1. Удалите `LambdaSerializer` аттрибут сборки. Это важно!
@@ -16,4 +20,4 @@
 
 ### Пример
 
-В проекте LambdaWarmer.Function реализована простая лямбда
+В проекте `LambdaWarmer.TestFunction` реализована простая лямбда
