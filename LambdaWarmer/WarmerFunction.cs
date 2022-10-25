@@ -115,9 +115,11 @@ public abstract class WarmerFunction<TRequest, TResponse>
 
     #region Abstract members
 
-    protected abstract Task InternalWarmUpAsync(ILambdaContext context);
+    // ReSharper disable once MemberCanBeProtected.Global
+    public abstract Task InternalWarmUpAsync(ILambdaContext context);
 
-    protected abstract Task<TResponse> InternalFunctionHandlerAsync(TRequest request, ILambdaContext context);
+    // ReSharper disable once MemberCanBeProtected.Global
+    public abstract Task<TResponse> InternalFunctionHandlerAsync(TRequest request, ILambdaContext context);
 
     #endregion
     

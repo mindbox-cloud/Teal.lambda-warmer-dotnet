@@ -9,13 +9,13 @@ public class Payload
 
 public class Function : WarmerFunction<Payload, string>
 {
-    protected override Task InternalWarmUpAsync(ILambdaContext context)
+    public override Task InternalWarmUpAsync(ILambdaContext context)
     {
         context.Logger.LogInformation("WARM UP");
         return Task.CompletedTask;
     }
 
-    protected override Task<string> InternalFunctionHandlerAsync(Payload payload, ILambdaContext context)
+    public override Task<string> InternalFunctionHandlerAsync(Payload payload, ILambdaContext context)
     {
         return Task.FromResult(payload.Input.ToUpper());
     }
