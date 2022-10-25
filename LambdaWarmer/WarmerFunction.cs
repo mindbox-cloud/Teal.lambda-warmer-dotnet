@@ -30,7 +30,6 @@ public abstract class WarmerFunction<TRequest, TResponse>
         var warmerEvent = await DeserializeAsync(requestStream);
         if (warmerEvent.Warmer)
         {
-            await InternalWarmUpAsync(context);
             await WarmUpAsync(warmerEvent, context);
             return Stream.Null;
         }
@@ -64,6 +63,8 @@ public abstract class WarmerFunction<TRequest, TResponse>
         {
             await Task.Delay(_config.Delay);
         }
+        
+        await InternalWarmUpAsync(context);
     }
 
     private async Task InvokeConcurrency(ILambdaContext context, int concurrency, string correlationId)
