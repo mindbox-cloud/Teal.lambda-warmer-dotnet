@@ -4,6 +4,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>LambdaWarmer</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Lipatov Alexander</Authors>
+        <Company>Teal.Inc</Company>
+        <Description>A module to optimize AWS Lambda function cold starts</Description>
+        <PackageProjectUrl>https://github.com/teal-inc/lambda-warmer-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/teal-inc/lambda-warmer-dotnet</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
