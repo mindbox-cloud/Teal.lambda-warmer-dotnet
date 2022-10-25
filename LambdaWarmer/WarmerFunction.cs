@@ -17,11 +17,11 @@ public abstract class WarmerFunction<TRequest, TResponse>
     private bool _warm;
     private DateTimeOffset? _lastAccess;
 
-    protected WarmerFunction(WarmerConfig? config = null)
+    protected WarmerFunction(WarmerConfig? config = null, IAmazonLambda? lambda = null)
     {
         _config = config ?? new WarmerConfig();
         SerializerOptions = CreateDefaultJsonSerializationOptions();
-        _lambda = new AmazonLambdaClient();
+        _lambda = lambda ?? new AmazonLambdaClient();
     }
 
     // ReSharper disable once UnusedMember.Global
