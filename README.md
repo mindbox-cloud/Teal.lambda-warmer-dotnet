@@ -17,6 +17,13 @@ dotnet add package LambdaWarmer --version 1.0.0
 3. Реализуйте вашу бизнес логику в методе `InternalFunctionHandlerAsync`
 4. Логику прогрева опишите в `InternalWarmUpAsync`
 5. В настройках лямбды handler укажите как `FunctionHandlerAsync`. Это важно!
+6. Настройте CloudWatch Events триггер с body:
+    ```json
+    {
+      "warmer": true,
+      "concurrency": 69
+    }
+    ```
 
 ### Пример
 
