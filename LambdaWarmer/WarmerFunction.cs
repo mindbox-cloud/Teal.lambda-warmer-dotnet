@@ -54,22 +54,24 @@ public abstract class WarmerFunction<TRequest, TResponse>
         }
 
         _warm = true;
-    
-        if (concurrency > 1)
-        {
-            await InvokeConcurrency(context, concurrency, correlationId);
-        } 
-        else if (invocationNumber > 1)
-        {
-            await Task.Delay(_config.Delay);
-        }
         
-        await InternalWarmUpAsync(context);
+        await Task.Delay(_config.Delay);
+
+        if (concurrency == 1)
+        {
+            await InternalWarmUpAsync(context);
+            return;
+        }
+
+        await InvokeConcurrency(context, concurrency, correlationId);
     }
 
     private async Task InvokeConcurrency(ILambdaContext context, int concurrency, string correlationId)
     {
-        var invocations = new List<Task>();
+        var tasks = new List<Task>
+        {
+            InternalWarmUpAsync(context)
+        };
 
         for (var i = 2; i <= concurrency; i++)
         {
@@ -89,10 +91,10 @@ public abstract class WarmerFunction<TRequest, TResponse>
                 })
             };
                 
-            invocations.Add(_lambda.InvokeAsync(invokeRequest));
+            tasks.Add(_lambda.InvokeAsync(invokeRequest));
         }
 
-        await Task.WhenAll(invocations);
+        await Task.WhenAll(tasks);
     }
 
     private void Log(ILambdaContext context, string correlationId, int invocationNumber, int totalInvocation)
